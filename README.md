@@ -20,6 +20,21 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+
+# Pushing to main and deploying 
+
+Before pushing the main, make sure to build the project using: ``` npm run build```
+
+Check that your changes are working as expected for production by running ```npx serve@latest out```
+
+# Running The Local Server 
+
+This project is temporarily using json server 
+
+I needed to be able to start practicing quickly for an interview. 
+
+Anyways, run npx ```json-server --watch db.json``` to start the server. 
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
