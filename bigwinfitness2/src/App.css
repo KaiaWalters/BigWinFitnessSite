@@ -1,5 +1,45 @@
 @import "tailwindcss";
 
+
+@tailwind utilities;
+
+@layer utilities {
+
+  .clip-diamond {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+
+  .clip-star {
+    clip-path: polygon(
+      50% 0%,
+      61% 35%,
+      98% 35%,
+      68% 57%,
+      79% 91%,
+      50% 70%,
+      21% 91%,
+      32% 57%,
+      2% 35%,
+      39% 35%
+    );
+  }
+
+  .clip-heart {
+    clip-path: polygon(
+      50% 15%,
+      61% 4%,
+      79% 4%,
+      100% 25%,
+      100% 50%,
+      50% 100%,
+      0% 50%,
+      0% 25%,
+      21% 4%,
+      39% 4%
+    );
+  }
+}
+
 #root {
   max-width: 1280px;
   text-align: center;
