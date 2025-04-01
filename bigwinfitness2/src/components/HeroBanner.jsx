@@ -11,7 +11,7 @@ const HeroBanner = () => {
 
       {/* Content */}
       <div className="relative z-10 p-8 max-w-2xl bg-white/30 rounded-2xl text-brown">
-        <h1 className="text-4xl z-9 md:text-6xl font-bold mb-4">Welcome to Your Next Big Win</h1>
+        <h1 className="text-4xl z-9 md:text-6xl font-bold mb-4">Welcome to Your Next<br/> Big Win</h1>
         <p className="text-lg z-9 md:text-xl mb-6">Explore the world with us and experience the beauty of nature like never before.</p>
         <button className="px-6 z-9 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg shadow-lg transition duration-300">
           Get Started
