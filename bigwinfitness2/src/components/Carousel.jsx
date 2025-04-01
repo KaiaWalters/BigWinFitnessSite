@@ -2,7 +2,7 @@ import React from "react";
 
 const Carousel = () => {
   return (
-    <div className="relative w-full h-screen flex items-center justify-center bg-gray-900 text-white text-center px-6">
+    <div className="relative w-full h-screen flex items-center justify-center bg-green-900 text-white text-center px-6">
 
       {/* Content */}
       <div className="relative z-10 max-w-2xl">

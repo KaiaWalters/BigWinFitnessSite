@@ -9,7 +9,7 @@ function App() {
     <>
       <HeroBanner/>
       <Carousel/>
-      <Section></Section>
+      <Section/>
     </>
   )
 }

@@ -3,7 +3,7 @@ import React from "react";
 
 const LoginForm = () => {
   return (
-    <div className="relative w-full h-screen flex items-center justify-center bg-gray-900 text-white text-center px-6">
+    <div className="relative w-full h-screen flex items-center justify-center bg-white text-black text-center px-6">
         <form action="">
             <label for="name">name</label>
             <input type="text" />
