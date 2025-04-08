@@ -1,7 +1,7 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import bgImage from "../assets/christian-mikhael-78gHd4C9aR8-unsplash.jpg";
+import bgImage from "../assets/homePage/images/home_isthataturtle_excellent.jpg";
 
 const responsive = {
   superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 5 },
@@ -19,7 +19,7 @@ const carouselItems = [
 
 const CarouselSection = () => {
   return (
-    <div className="relative w-full flex flex-col items-center justify-center bg-yellow-400 text-white text-center">
+    <div className="relative w-full flex flex-col items-center justify-center bg-amber-200 text-white text-center">
       <h2 className="text-4xl md:text-6xl font-bold mb-4 mt-8">
         Hit your weekly goals with...
       </h2>
