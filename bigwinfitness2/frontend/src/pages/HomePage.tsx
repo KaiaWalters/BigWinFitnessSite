@@ -8,8 +8,11 @@ const HomePage = () => {
     return (
        <>
            <HeroBanner/>
-           <CarouselSection/>
-           <Section/>
+           <div style={{display:'none'}}>
+            <CarouselSection/>
+            <Section/>
+           </div>
+          
        </>
      )
 }
