@@ -1,19 +1,33 @@
 import './App.css'
-import HeroBanner from './components/HeroBanner'
-import CarouselSection from './components/Carousel'
-import Section from './components/Section'
-import Navbar from './components/Navbar'
+import {
+  BrowserRouter as Router,
+  Routes, Route, Link
+} from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import CurrentEventsPage from './pages/CurrentEventsPage'
 
-function App() {
+const App = () => {
+
+  const padding = {
+    padding: 5
+  }
 
   return (
-    <>
-      <NavBar>
-        <HeroBanner/>
-        <CarouselSection/>
-        <Section/>
-      </NavBar>
-    </>
+    <Router>
+      <div>
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/events">events</Link>
+      </div>
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/events" element={<CurrentEventsPage />} />
+      </Routes>
+
+      <div>
+        <i>Big Win Fitness</i>
+      </div>
+    </Router>
   )
 }
 

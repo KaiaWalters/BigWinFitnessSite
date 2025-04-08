@@ -1,0 +1,35 @@
+{
+    "scripts": {
+        "start": "cross-env NODE_ENV=production node server.js",
+        "build-prod": "cd ../frontend/ && npm run build && cp -r dist ../backend/",
+        "dev": "cross-env NODE_ENV=development node --watch server.js",
+        "lint": "eslint --fix .",
+        "format": "npx prettier --write \"**/*.{ts,js,md}\"",
+        "check": "npx prettier --check \"**/*.{ts,js,md}\"",
+        "test": "cross-env NODE_ENV=test node --test"
+    },
+    "dependencies": {
+        "bcrypt": "^5.1.1",
+        "cors": "^2.8.5",
+        "cross-env": "^7.0.3",
+        "dotenv": "^16.4.7",
+        "eslint-plugin-react": "^7.37.4",
+        "eslint-plugin-react-hooks": "^5.1.0",
+        "eslint-plugin-react-refresh": "^0.4.19",
+        "express": "^4.21.2",
+        "express-jwt": "^8.5.1",
+        "mongoose": "^8.10.2",
+        "morgan": "^1.10.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.17.0",
+        "eslint": "^9.21.0",
+        "eslint-config-prettier": "^10.0.1",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-prettier": "^5.2.3",
+        "eslint-plugin-unused-imports": "^4.1.4",
+        "lint-staged": "^15.4.3",
+        "prettier": "^3.5.2",
+        "supertest": "^7.1.0"
+    }
+}

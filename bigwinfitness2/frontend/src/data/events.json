@@ -1,0 +1,184 @@
+{
+    "events": [
+      {
+        "date": "2025-03-28",
+        "title": "Morning Yoga Class",
+        "description": "Join us for an invigorating start to your day with a guided yoga session.",
+        "location": "Yoga Studio, Downtown",
+        "type": "Yoga",
+        "image": "https://example.com/yoga.jpg",
+        "headCount": 20
+      },
+      {
+        "date": "2025-03-30",
+        "title": "Spin Class",
+        "description": "High-energy cycling class for all levels. Burn calories and boost your stamina!",
+        "location": "Fitness Center, Midtown",
+        "type": "Spin",
+        "image": "https://example.com/spin-class.jpg",
+        "headCount": 30
+      },
+      {
+        "date": "2025-04-02",
+        "title": "Pilates Session",
+        "description": "Strengthen your core and improve flexibility with a low-impact pilates workout.",
+        "location": "Wellness Center, Uptown",
+        "type": "Pilates",
+        "image": "https://example.com/pilates.jpg",
+        "headCount": 15
+      },
+      {
+        "date": "2025-04-05",
+        "title": "CrossFit Bootcamp",
+        "description": "Intense CrossFit workout designed to push your limits.",
+        "location": "CrossFit Arena, Westside",
+        "type": "CrossFit",
+        "image": "https://example.com/crossfit.jpg",
+        "headCount": 25
+      },
+      {
+        "date": "2025-04-07",
+        "title": "Zumba Dance Party",
+        "description": "Get fit while dancing to energetic beats in this fun Zumba session.",
+        "location": "Community Hall, Downtown",
+        "type": "Zumba",
+        "image": "https://example.com/zumba.jpg",
+        "headCount": 40
+      },
+      {
+        "date": "2025-04-10",
+        "title": "HIIT Cardio Blast",
+        "description": "Burn fat fast with this high-intensity interval training session.",
+        "location": "Fitness Studio, Eastside",
+        "type": "HIIT",
+        "image": "https://example.com/hiit.jpg",
+        "headCount": 35
+      },
+      {
+        "date": "2025-04-12",
+        "title": "Strength Training Workshop",
+        "description": "Learn proper weightlifting techniques for muscle building.",
+        "location": "Gymnasium, Midtown",
+        "type": "Strength",
+        "image": "https://example.com/strength.jpg",
+        "headCount": 20
+      },
+      {
+        "date": "2025-04-15",
+        "title": "Marathon Prep Training",
+        "description": "Train for your next marathon with expert coaches.",
+        "location": "City Park, Central",
+        "type": "Running",
+        "image": "https://example.com/marathon.jpg",
+        "headCount": 50
+      },
+      {
+        "date": "2025-04-18",
+        "title": "Aqua Aerobics",
+        "description": "Low-impact water aerobics for joint-friendly fitness.",
+        "location": "Recreational Pool, Uptown",
+        "type": "Aqua Fitness",
+        "image": "https://example.com/aqua.jpg",
+        "headCount": 30
+      },
+      {
+        "date": "2025-04-21",
+        "title": "Parkour Fundamentals",
+        "description": "Learn the basics of parkour and urban movement.",
+        "location": "Training Ground, Westside",
+        "type": "Parkour",
+        "image": "https://example.com/parkour.jpg",
+        "headCount": 15
+      },
+      {
+        "date": "2025-04-23",
+        "title": "Rock Climbing Basics",
+        "description": "An introduction to indoor rock climbing techniques.",
+        "location": "Climbing Gym, Downtown",
+        "type": "Climbing",
+        "image": "https://example.com/climbing.jpg",
+        "headCount": 20
+      },
+      {
+        "date": "2025-04-26",
+        "title": "Tai Chi Meditation",
+        "description": "Improve balance and relaxation with guided Tai Chi movements.",
+        "location": "Peaceful Gardens, Eastside",
+        "type": "Tai Chi",
+        "image": "https://example.com/taichi.jpg",
+        "headCount": 25
+      },
+      {
+        "date": "2025-04-28",
+        "title": "Boxing Training Camp",
+        "description": "Get in the ring and learn basic boxing techniques.",
+        "location": "Boxing Gym, Midtown",
+        "type": "Boxing",
+        "image": "https://example.com/boxing.jpg",
+        "headCount": 20
+      },
+      {
+        "date": "2025-05-01",
+        "title": "Kickboxing Workout",
+        "description": "Burn calories and improve agility with a fun kickboxing session.",
+        "location": "MMA Studio, Downtown",
+        "type": "Kickboxing",
+        "image": "https://example.com/kickboxing.jpg",
+        "headCount": 25
+      },
+      {
+        "date": "2025-05-04",
+        "title": "Obstacle Course Challenge",
+        "description": "Test your endurance with a fun obstacle course.",
+        "location": "Outdoor Adventure Park, Central",
+        "type": "Obstacle Course",
+        "image": "https://example.com/obstacle.jpg",
+        "headCount": 40
+      },
+      {
+        "date": "2025-05-07",
+        "title": "Mindful Meditation & Breathwork",
+        "description": "Relax and de-stress with guided meditation and breathwork.",
+        "location": "Wellness Center, Uptown",
+        "type": "Meditation",
+        "image": "https://example.com/meditation.jpg",
+        "headCount": 30
+      },
+      {
+        "date": "2025-05-10",
+        "title": "Flexibility & Stretching Class",
+        "description": "Improve flexibility and reduce injury risk with proper stretching techniques.",
+        "location": "Yoga Studio, Eastside",
+        "type": "Stretching",
+        "image": "https://example.com/stretching.jpg",
+        "headCount": 20
+      },
+      {
+        "date": "2025-05-12",
+        "title": "Dance Cardio Party",
+        "description": "Dance your way to fitness with high-energy moves and music.",
+        "location": "Community Hall, Midtown",
+        "type": "Dance",
+        "image": "https://example.com/dance.jpg",
+        "headCount": 35
+      },
+      {
+        "date": "2025-05-15",
+        "title": "Beach Bootcamp",
+        "description": "Outdoor workout combining strength, agility, and endurance exercises.",
+        "location": "Seaside Beach, Coastal",
+        "type": "Bootcamp",
+        "image": "https://example.com/bootcamp.jpg",
+        "headCount": 50
+      },
+      {
+        "date": "2025-05-18",
+        "title": "Cycling Endurance Ride",
+        "description": "Challenge yourself with a long-distance endurance cycling session.",
+        "location": "Bike Trail, Outskirts",
+        "type": "Cycling",
+        "image": "https://example.com/cycling.jpg",
+        "headCount": 30
+      }
+    ]
+  }
