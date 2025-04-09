@@ -17,6 +17,8 @@ const Navbar = () => {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 <Link to="/" className="px-3 py-2 text-md font-medium text-white" aria-current="page">Home</Link>
+                <Link to="/registration" className="px-3 py-2 text-md font-medium text-white hover:text-white">Registration</Link>
+                <Link to="/profile" className="px-3 py-2 text-md font-medium text-white hover:text-white">Profile</Link>
                 <Link to="/events" className="px-3 py-2 text-md font-medium text-white hover:text-white">Events</Link>
               </div>
             </div>
@@ -64,6 +66,8 @@ const MobileMenu = ({ menuOpen, setMenuOpen }) => {
       <div className="space-y-1 px-2 pt-2 pb-3">
         <Link to="/" onClick={()=>{setMenuOpen(!menuOpen)}} className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Home</Link>
         <Link to="/events" onClick={()=>{setMenuOpen(!menuOpen)}} className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Events</Link>
+        <Link to="/registration" onClick={()=>{setMenuOpen(!menuOpen)}} className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Registration</Link>
+        <Link to="/profile" onClick={()=>{setMenuOpen(!menuOpen)}} className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Profile</Link>
       </div>
     </div>
   );
