@@ -17,9 +17,10 @@ const Navbar = () => {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 <Link to="/" className="px-3 py-2 text-md font-medium text-white" aria-current="page">Home</Link>
-                <Link to="/registration" className="px-3 py-2 text-md font-medium text-white hover:text-white">Registration</Link>
+                <Link to="/register" className="px-3 py-2 text-md font-medium text-white hover:text-white">Registration</Link>
                 <Link to="/profile" className="px-3 py-2 text-md font-medium text-white hover:text-white">Profile</Link>
                 <Link to="/events" className="px-3 py-2 text-md font-medium text-white hover:text-white">Events</Link>
+                <Link to="/events/admin" className="px-3 py-2 text-md font-medium text-white hover:text-white">Admin</Link>
               </div>
             </div>
           </div>
@@ -66,8 +67,9 @@ const MobileMenu = ({ menuOpen, setMenuOpen }) => {
       <div className="space-y-1 px-2 pt-2 pb-3">
         <Link to="/" onClick={()=>{setMenuOpen(!menuOpen)}} className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Home</Link>
         <Link to="/events" onClick={()=>{setMenuOpen(!menuOpen)}} className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Events</Link>
-        <Link to="/registration" onClick={()=>{setMenuOpen(!menuOpen)}} className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Registration</Link>
+        <Link to="/register" onClick={()=>{setMenuOpen(!menuOpen)}} className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Registration</Link>
         <Link to="/profile" onClick={()=>{setMenuOpen(!menuOpen)}} className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Profile</Link>
+        <Link to="/events/admin" onClick={()=>{setMenuOpen(!menuOpen)}} className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-700 hover:text-white">Admin</Link>
       </div>
     </div>
   );
@@ -76,13 +78,9 @@ const MobileMenu = ({ menuOpen, setMenuOpen }) => {
 const Notifications = () => {
   return (
     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-      <button className="px-4 py-2 border-2 rounded-2xl">Login</button>
-      {/* <button type="button" className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden">
-        <span className="sr-only">View notifications</span>
-        <svg className="size-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-        </svg>
-      </button> */}
+      <Link to="/register" className="px-4 py-2 hover:bg-yellow-600 text-white border-2 rounded-2xl">
+        Login
+      </Link>
     </div>
   );
 };
