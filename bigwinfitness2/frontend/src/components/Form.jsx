@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const Fields = [
   {
@@ -48,10 +48,16 @@ const LoginForm = () => {
     setFormData({...formData, [id]: value})
   } 
 
-  const handleSubmit = (e) => {
-    e.preventDefault
-    console.log(formData)
-  } 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      
+    } catch (error) {
+        console.error('Network error:', error)
+        alert('Network error', error)
+    }
+}
 
   // useEffect(() => {
   //     console.log(formData)
