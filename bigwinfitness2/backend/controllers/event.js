@@ -1,7 +1,6 @@
 const eventsRouter = require('express').Router()
 const Event = require('../models/event.schema')
 
-//***** GET COMPANY INFO*****
 eventsRouter.get('/', async (req, res) => {
     try {
         await EventCounts.find({}).then((event) => {
@@ -13,7 +12,6 @@ eventsRouter.get('/', async (req, res) => {
     }
 })
 
-//***** EDIT COMPANY INFO *****
 eventsRouter.put('/:id', async (req, res) => {
     try {
         const ID = req.params.id
@@ -50,7 +48,6 @@ eventsRouter.put('/:id', async (req, res) => {
     }
 })
 
-//***** ADD COMPANY *****
 eventsRouter.post('/', async (req, res) => {
     try {
         const { name, status, applicationUrl, notes, pointOfContact, priority} = req.body 
@@ -73,7 +70,6 @@ eventsRouter.post('/', async (req, res) => {
     }
 })
 
-//***** DELETE COMPANY *****
 eventsRouter.delete('/:id', async (req, res) => {
     try {
         const deletedCompany = await Company.findByIdAndDelete(req.params.id)
@@ -89,7 +85,6 @@ eventsRouter.delete('/:id', async (req, res) => {
     }
 })
 
-//***** GET ALL POINTS OF CONTACTS *****
 eventsRouter.get('/all-contacts', async (req, res) => {
     try {
         const eventsPoc = await Company.find({}, 'pointOfContacts -_id')
@@ -108,7 +103,6 @@ eventsRouter.get('/all-contacts', async (req, res) => {
     }
 })
 
-// get by id
 eventsRouter.get('/:id', async (req, res) => {
     try {
         const companyId = req.params.id
