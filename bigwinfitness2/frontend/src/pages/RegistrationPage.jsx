@@ -22,7 +22,7 @@ const RegistrationPage = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formValues),
+                body: JSON.stringify(formValues)
             })
 
             if (response.ok) {

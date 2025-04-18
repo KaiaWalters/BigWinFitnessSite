@@ -1,29 +1,39 @@
-import nodemailer from "nodemailer";
+const nodemailer = require("nodemailer");
 
-console.log("Inside NodeMailerService");
+
+console.log(process.env.OUTLOOK_USER)
+
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: "smtp.office365.com",
   port: 587,
-  secure: false, // true for port 465, false for other ports
+  secure: false, 
   auth: {
-    user: "thrivntech@gmail.com",
-    pass: "positivevibesonly123", // generated ethereal password
+    user: process.env.OUTLOOK_USER, 
+    pass: process.env.OUTLOOK_APP_PASSWORD,
+  },
+  tls: {
+    ciphers: 'SSLv3',
   },
 });
 
-// async..await is not allowed in global scope, must use a wrapper
-async function main({email, password, name}) {  
-  console.log("Transport object","email", email);
-  const info = await transporter.sendMail({
-    from: '"BigWinFitness" <thrivntech@gmail.com>', // sender address
-    to: "kaiac.walters@.com", // list of receivers
-    subject: "A new user has reqnuested access to BWF ✔", // Subject line
-    text: "should contain a user's email password and name", // plain text body
-    html: `<b>Here is the new user's information: Name: ${name} </br> Email: ${email} </br> Password ${password}</b>`, // html body
-  });
+async function main({ email, name }) {
+  try {
+    const info = await transporter.sendMail({
+      from: '"BigWinFitness" <your-email@outlook.com>',
+      to: "kaiac.walters@gmail.com",
+      subject: "A new user has requested access to BWF ✔",
+      html: `
+        <b>New User Info</b><br/>
+        Name: ${name}<br/>
+        Email: ${email}<br/>
+  
+      `,
+    });
 
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
+    console.log("✅ Message sent:", info.messageId);
+  } catch (err) {
+    console.error("❌ Failed to send email:", err);
+  }
 }
 
-export default main;
+module.exports = main;
