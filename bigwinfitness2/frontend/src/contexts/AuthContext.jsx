@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
 
 const AuthContext = createContext()
 
@@ -52,27 +53,26 @@ const AuthProvider = ({ children }) => {
         }
     }
 
-    const requestAccess = async (token, email, message) => {
+    const requestAccess = async (data) => {
+        console.log("request context", data)
             fetch('http://localhost:3001/emailAdminNewRequest', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, message }),
+                body: JSON.stringify(data),
             })
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }
-                return response.json()
+                return <Navigate to="/" />
             })
             .then((data) => {
                 console.log('Email sent successfully:', data)
-                alert('success', 'Request access email sent successfully')
             })
             .catch((error) => {
                 console.error('Error sending email:', error)
-                alert('error', 'Failed to send request access email. Please try again.')
             })
             console.log('Request access email sent successfully')
     }

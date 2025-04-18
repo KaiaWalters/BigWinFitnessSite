@@ -16,7 +16,6 @@ app.use(express.json())
 app.use('/', mailServiceRouter) 
 app.use('/auth', authenticationRouter)
 
-
 //must go after routes or it will block them
 app.use(main)
 

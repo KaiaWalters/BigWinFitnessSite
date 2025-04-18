@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
-import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 const RegistrationPage = () => {
     const initialFormValues = {
@@ -11,40 +12,14 @@ const RegistrationPage = () => {
     }
 
     const { requestAccess } = useContext(AuthContext)
+    const navigate = useNavigate()
     const [formValues, setFormValues] = useState(initialFormValues)
-    const local = 'http://localhost:3001/emailAdminNewRequest'
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch(local, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formValues)
-            })
-
-            if (response.ok) {
-                const data = await response.json()
-                const token = data.token
-                console.log("Data", data)
-
-                if (token) {
-                    requestAccess(
-                        token,
-                        data.user.email,
-                        'Request for access sent successfully',
-                    ) // Save the token and update the authentication state
-                } else {
-                    console.error('No token found in the response')
-                }
-            } else {
-                // TODO: Handle error response with a error page
-                const errorMessage = await response.json()
-                console.error('Error saving request for access:', errorMessage)
-                alert(`Error sending request for access: ${errorMessage.message}`)
-            }
+            requestAccess(formValues) 
+            navigate('/')          
         } catch (error) {
             console.error('Network error:', error)
             alert('Network error', error)
