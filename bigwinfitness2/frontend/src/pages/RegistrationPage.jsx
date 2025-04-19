@@ -28,33 +28,6 @@ const RegistrationPage = () => {
 
     return (
         <div>
-            <header
-            style={{
-                backgroundColor: '#007bff',
-                color: '#ffffff',
-                padding: '20px',
-                textAlign: 'center',
-                fontSize: '28px',
-                fontWeight: 'bold',
-                borderRadius: '8px',
-                marginBottom: '20px',
-                width: '100%',
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            }}
-        >
-            Welcome to the Hitlist
-        </header>
-
-            <div style={{ marginTop: '30px', textAlign: 'center', color: '#555', fontSize: '20px' }}>
-                <h3>Why Join Hitlist?</h3>
-                <ul style={{ listStyleType: 'none', padding: 0 }}>
-                    <li>✔ Track your job applications with ease</li>
-                    <li>✔ Stay organized during your job search</li>
-                    <li>✔ Land your dream job faster</li>
-                </ul>
-            </div>
-
-            
             <div className="signup-container">
                 <h2 className="signup-title">Sign Up</h2>
                 <form className="signup-form" onSubmit={handleSubmit}>
