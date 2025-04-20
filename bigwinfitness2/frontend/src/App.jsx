@@ -6,8 +6,11 @@ import {
 import HomePage from './pages/HomePage'
 import CurrentEventsPage from './pages/CurrentEventsPage'
 import RegistrationPage from './pages/RegistrationPage'
+import RegistrationConfirmationPage from './pages/RegistrationConfirmationPage'
 import Navbar from './components/Navbar'
 import { AuthProvider } from './contexts/AuthContext'
+import AdminSigninPage from './pages/AdminSigninPage'
+import ProfilePage from './pages/ProfilePage'
 
 const App = () => {
   return (
@@ -18,8 +21,9 @@ const App = () => {
           <Route path="/" element={<HomePage/>} />
           <Route path="/events" element={<CurrentEventsPage/>} />
           <Route path="/register" element={<RegistrationPage/>} />
-          <Route path="/profile" element={<>Your profile</>} />
-          <Route path="/events/admin" element={<>Admin event management page</>}/>
+          <Route path="/register/confirmation" element={<RegistrationConfirmationPage/>} />
+          <Route path="/admin/signin" element={<AdminSigninPage/>}/>
+          <Route path="/profile" element={<ProfilePage/>} />
         </Routes>
       </Router>
     </AuthProvider>
