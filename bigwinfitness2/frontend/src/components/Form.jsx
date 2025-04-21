@@ -50,13 +50,6 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    try {
-      
-    } catch (error) {
-        console.error('Network error:', error)
-        alert('Network error', error)
-    }
 }
 
   // useEffect(() => {
