@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 
 const AdminSigninPage = () => {
+
     const initialFormValues = {
         userName: '', 
         password: '', 
@@ -15,9 +16,9 @@ const AdminSigninPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         try {
-            const response = await fetch('http://localhost:3001/login', {
+
+            const response = await fetch('http://localhost:3001/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,8 +42,8 @@ const AdminSigninPage = () => {
                 alert(`Error logging in: ${errorMessage.message}`)
             }
         } catch (error) {
-            console.error('Network error:', error)
-            alert('Network error', error)
+            console.error('Network error:', error.message)  
+            alert('Network error BEANS', error.message)
         }
     }
 
@@ -82,7 +83,7 @@ const AdminSigninPage = () => {
                     </button>
                     <span>Don't have an account?
                         <NavLink to='/register' style={{ textDecoration: 'none', color: '#007bff', marginLeft: '5px' }}>
-                        <span>Request access</span>
+                            <span>Request access</span>
                         </NavLink> 
                     </span>
                 </form>
