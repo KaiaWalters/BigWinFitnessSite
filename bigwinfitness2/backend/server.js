@@ -8,8 +8,7 @@ const mailServiceRouter = require('./controllers/mailService')
 
 const cors = require('cors')
 const PORT = 3001
-// moce out to a controllefolder
-// must stay here in order to load before making api requests (do not move)
+
 app.use(cors({ origin: 'http://localhost:5173', optionsSuccessStatus: 200 }))
 app.use(express.json())
 

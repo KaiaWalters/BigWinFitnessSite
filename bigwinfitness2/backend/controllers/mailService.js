@@ -14,7 +14,14 @@ mailServiceRouter.post("/emailAdminNewRequest", async (req, res) => {
     from: "Acme <onboarding@resend.dev>",
     to: ['kaiac.walters@gmail.com'],
     subject: "A new user has requested access to BWF ✔",
-    html:  `<div><strong>Email:</strong><span> ${email}</span><br><strong>First Name:</strong><span> ${firstName}</span><br><strong>Last Name:</strong><span> ${lastName}</span><br><strong>Why they want to join:</strong><span> ${whyStatement}</span><br><button href="#">Create new member</button><button href="#">Reject request</button></div>`
+    html:  `<div>
+    <strong>Email:</strong><span> ${email}</span><br>
+    <strong>First Name:</strong><span> ${firstName}</span><br>
+    <strong>Last Name:</strong><span> ${lastName}</span><br>
+    <strong>Why they want to join:</strong><span> ${whyStatement}</span><br>
+    <a href="http://localhost:5173/admin/signin" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Create new member</a>
+    <a href="#" style="display: inline-block; padding: 10px 20px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-left: 10px;">Reject request</a>
+  </div>`
   });
 
   if (error) {

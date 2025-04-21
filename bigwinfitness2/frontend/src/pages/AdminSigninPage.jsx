@@ -1,108 +1,100 @@
 import React, { useState, useContext } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
-const RegistrationPage = () => {
+const AdminSigninPage = () => {
+
     const initialFormValues = {
-        firstName: '', 
-        lastName: '', 
-        email: '', 
-        whyStatement: ''
+        userName: '', 
+        password: '', 
     }
 
-    const { requestAccess } = useContext(AuthContext)
+    const { login } = useContext(AuthContext)
     const navigate = useNavigate()
     const [formValues, setFormValues] = useState(initialFormValues)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            requestAccess(formValues) 
-            navigate('/register/confirmation')          
+
+            const response = await fetch('http://localhost:3001/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formValues),
+            })
+
+            if (response.ok) {
+                const data = await response.json()
+                const token = data.token
+
+                if (token) {
+                    login(token, data.user.username, data.user.email) 
+                    navigate('/profile')
+                } else {
+                    console.error('No token found in the response')
+                }
+            } else {
+                const errorMessage = await response.json()
+                console.error('Error logging in:', errorMessage)
+                alert(`Error logging in: ${errorMessage.message}`)
+            }
         } catch (error) {
-            console.error('Network error:', error)
-            alert('Network error', error)
+            console.error('Network error:', error.message)  
+            alert('Network error BEANS', error.message)
         }
     }
 
     return (
         <div>
-            <div className="signup-container">
-                <h2 className="signup-title">Sign Up</h2>
-                <form className="signup-form" onSubmit={handleSubmit}>
+            <div className="login-container">
+                <h2 className="login-title">Log In</h2>
+                <form className="login-form" onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="firstName">First Name</label>
+                        <label htmlFor="userName">Username</label>
                         <input
                             type="text"
-                            id="firstName"
-                            name="firstName"
-                            placeholder="Enter your first name"
+                            id="userName"
+                            name="userName"
+                            placeholder="Enter your username"
                             className="input-field"
                             required
-                            value={formValues.firstName}
-                            onChange={(e) => setFormValues({...formValues, firstName: e.target.value})}
+                            value={formValues.userName}
+                            onChange={(e) => setFormValues({...formValues, userName: e.target.value})}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="lastName">Last name</label>
+                        <label htmlFor="password">Password</label>
                         <input
-                            type="text"
-                            id="lastName"
-                            name="lastName"
-                            placeholder="Enter your last name"
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
                             className="input-field"
-                            value={formValues.lastName}
-                            onChange={(e) => setFormValues({...formValues, lastName: e.target.value})}
                             required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Enter your email"
-                            className="input-field"
-                            value={formValues.email}
-                            onChange={(e) => setFormValues({...formValues, email: e.target.value})}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="whyStatement">Your why</label>
-                        <input
-                            type="text"
-                            id="whyStatement"
-                            name="whyStatement"
-                            placeholder="Why do you want to join Big Win Fitness?"
-                            className="input-field"
-                            value={formValues.whyStatement}
-                            onChange={(e) => setFormValues({...formValues, whyStatement: e.target.value})}
-                            required    
+                            value={formValues.password}
+                            onChange={(e) => setFormValues({...formValues, password: e.target.value})}
                         />
                     </div>
                     <button type="submit" className="submit-button">
-                        Sign Up
+                        Log In
                     </button>
-                    <span>Already have an account?
-                        <NavLink to='/login'>
-                        <span> Sign in</span>
+                    <span>Don't have an account?
+                        <NavLink to='/register' style={{ textDecoration: 'none', color: '#007bff', marginLeft: '5px' }}>
+                            <span>Request access</span>
                         </NavLink> 
                     </span>
                 </form>
 
                 <p style={{ textAlign: 'center', marginTop: '20px', color: '#555' }}>
-                    Join the Hitlist today and land your dream job!
+                    Welcome back! Log in to continue.
                 </p>
-
-
-
             </div>
 
             <style jsx>{`
-                .signup-container {
+                .login-container {
                     max-width: 400px;
                     margin: 50px auto;
                     padding: 20px;
@@ -111,14 +103,14 @@ const RegistrationPage = () => {
                     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
                 }
 
-                .signup-title {
+                .login-title {
                     text-align: center;
                     font-size: 24px;
                     margin-bottom: 20px;
                     color: #333;
                 }
 
-                .signup-form {
+                .login-form {
                     display: flex;
                     flex-direction: column;
                     gap: 15px;
@@ -168,4 +160,4 @@ const RegistrationPage = () => {
     )
 }
 
-export default RegistrationPage
+export default AdminSigninPage
