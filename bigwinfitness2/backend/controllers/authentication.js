@@ -5,10 +5,12 @@ const authenticationRouter = require('express').Router()
 authenticationRouter.post('/login', async (req, res) => {
 
     const { username, password } = req.body
+    console.log("req.body", req.body)
+    console.log("username", username, "password", password)
 
     try {
         const user = await User.findOne({ username })
-        console.log(user)
+        console.log("user", user)
 
         if (!user) {
             return res
