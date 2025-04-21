@@ -3,17 +3,17 @@ const jwt = require('jsonwebtoken')
 const authenticationRouter = require('express').Router()
 
 authenticationRouter.post('/login', async (req, res) => {
-    console.log("req.body",req.body)
-    const { email, password } = req.body
+
+    const { username, password } = req.body
 
     try {
-        const user = await User.findOne({ email })
+        const user = await User.findOne({ username })
         console.log(user)
 
         if (!user) {
             return res
                 .status(400)
-                .json({ message: 'Invalid email or password' })
+                .json({ message: 'Invalid username or password' })
         }
 
         const isMatch = await user.comparePassword(password)
@@ -21,10 +21,10 @@ authenticationRouter.post('/login', async (req, res) => {
         if (!isMatch) {
             return res
                 .status(400)
-                .json({ message: 'Invalid email or password' })
+                .json({ message: 'Invalid username or password' })
         }
 
-        const token = jwt.sign({ email, password }, 'xxx-xxx', {
+        const token = jwt.sign({ username, password }, 'xxx-xxx', {
             expiresIn: '1h',
         })
 
@@ -36,7 +36,7 @@ authenticationRouter.post('/login', async (req, res) => {
 
 authenticationRouter.post('/sign-up', async (req, res) => {
     try {
-        const { email, password, username } = req.body
+        const { email, password, username, isAdmin } = req.body
 
         const existingEmail = await User.findOne({ email })
         if (existingEmail) {
@@ -48,9 +48,9 @@ authenticationRouter.post('/sign-up', async (req, res) => {
             return res.status(400).json({ message: 'Username already in use' })
         }
 
-        const user = new User({ email, password, username })
+        const user = new User({ email, password, username, isAdmin })
 
-        const token = jwt.sign({ email, password, username }, 'xxx-xxx', {
+        const token = jwt.sign({ email, password, username, isAdmin }, 'xxx-xxx', {
             expiresIn: '1h',
         })
 
