@@ -50,9 +50,9 @@ authenticationRouter.post('/sign-up', async (req, res) => {
             return res.status(400).json({ message: 'Username already in use' })
         }
 
-        const user = new User({ email, password, username, isAdmin })
+        const user = new User({ email, password, username, isAdmin, status: "member" })
 
-        const token = jwt.sign({ email, password, username, isAdmin }, 'xxx-xxx', {
+        const token = jwt.sign({ email, password, username, isAdmin, status: "member" }, 'xxx-xxx', {
             expiresIn: '1h',
         })
 
