@@ -32,6 +32,7 @@ mailServiceRouter.post("/emailAdminNewRequest", async (req, res) => {
 
     const user = new User(newUser);
 
+
     const token = jwt.sign(newUser,'xxx-xxx', {
       expiresIn: '1h',
     });
@@ -87,6 +88,18 @@ mailServiceRouter.post("/emailAdminNewRequest", async (req, res) => {
     console.error('❌ Outer catch:', error.message);
     return res.status(500).json({ message: 'Server error', error: error.message });
   }
+});
+
+mailServiceRouter.get("/requestsForAccess", async (req, res) => {
+    try {
+
+        const users = await User.find({status: "requested"})
+        res.json(users)
+
+    } catch (error) {
+        console.error('Error getting requests for access', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+    }
 });
 
 module.exports = mailServiceRouter;

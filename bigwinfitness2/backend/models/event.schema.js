@@ -8,6 +8,6 @@ const eventSchema = new mongoose.Schema({
     priority: { type: String, enum: ['High', 'Medium', 'Low'], default: 'Medium' }, 
 })
 
-const EventModel = mongoose.model('Event', EventCountsSchema)
+const EventModel = mongoose.model('Event', EventCountsa)
 
 module.exports = EventModel
