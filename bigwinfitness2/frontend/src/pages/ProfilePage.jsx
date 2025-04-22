@@ -6,7 +6,6 @@ const ProfilePage = () => {
     const [newUserRequests, setNewUserRequests] = useState([]);
     const [notification, setNotification] = useState('');
 
-    // Fetch new user requests
     useEffect(() => {
         const fetchNewUserRequests = async () => {
             try {
