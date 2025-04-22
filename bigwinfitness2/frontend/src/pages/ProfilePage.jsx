@@ -9,14 +9,15 @@ const ProfilePage = () => {
     useEffect(() => {
         const fetchNewUserRequests = async () => {
             try {
-                const response = await fetch(`http://localhost:3001/admin/new-requests`);
+                const response = await fetch(`http://localhost:3001/requestsForAccess`);
                 if (response.ok) {
                     const data = await response.json();
-                    setNewUserRequests(data.requests);
+                    console.log(data)
+                    setNewUserRequests(data);
 
                     // Show a notification if there are new requests
-                    if (data.requests.length > 0) {
-                        setNotification(`${data.requests.length} new user request(s) pending approval.`);
+                    if (data.length > 0) {
+                        setNotification(`${data.length} new user request(s) pending approval.`);
                     }
                 } else {
                     console.error('Failed to fetch new user requests');
@@ -71,11 +72,11 @@ const ProfilePage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {newUserRequests.map((request, index) => (
+                            {newUserRequests.map((user, index) => (
                                 <tr key={index} className="hover:bg-gray-100">
-                                    <td className="border border-gray-300 px-4 py-2">{request.firstName}</td>
-                                    <td className="border border-gray-300 px-4 py-2">{request.lastName}</td>
-                                    <td className="border border-gray-300 px-4 py-2">{request.userWhy}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{ user.firstname}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{ user.lastname}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{ user.whystatement}</td>
                                 </tr>
                             ))}
                         </tbody>

@@ -26,6 +26,9 @@ mailServiceRouter.post("/emailAdminNewRequest", async (req, res) => {
       email,
       password: tempPassword,
       username: tempUsername,
+      firstname: firstName, 
+      lastname: lastName,
+      whystatement: whyStatement,
       status: "requested",
       isAdmin: false,
     };
