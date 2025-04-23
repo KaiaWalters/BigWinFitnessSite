@@ -19,13 +19,10 @@ mailServiceRouter.post("/emailAdminNewRequest", async (req, res) => {
       return res.status(400).json({ message: 'This user is already registered' });
     }
 
-    const tempUsername = generateFromEmail(email);
-    const tempPassword = generateUsername();
-
     const newUser = {
       email,
-      password: tempPassword,
-      username: tempUsername,
+      password: "temporary",
+      username: "temporary",
       firstname: firstName, 
       lastname: lastName,
       whystatement: whyStatement,
@@ -72,6 +69,7 @@ mailServiceRouter.post("/emailAdminNewRequest", async (req, res) => {
     console.log("🟢 Attempting to save user...");
 
     try {
+      console.log("SAVING USER", user)
       await user.save();
       console.log('✅ User saved successfully:', user);
     } catch (saveError) {
@@ -93,10 +91,10 @@ mailServiceRouter.post("/emailAdminNewRequest", async (req, res) => {
   }
 });
 
-mailServiceRouter.get("/requestsForAccess", async (req, res) => {
+mailServiceRouter.get("/users", async (req, res) => {
     try {
 
-        const users = await User.find({status: "requested"})
+        const users = await User.find({})
         res.json(users)
 
     } catch (error) {
@@ -107,7 +105,7 @@ mailServiceRouter.get("/requestsForAccess", async (req, res) => {
 
 
 mailServiceRouter.put('/validateRequests', async (req, res) => {
-  console.log(req.body)
+  // TOdO: mail service should send confirmation email to the invited user
   const ID = req.body._id
   try {
       if (!ID) {
@@ -117,25 +115,63 @@ mailServiceRouter.put('/validateRequests', async (req, res) => {
       if (!req.body || Object.keys(req.body).length === 0) {
           return res.status(400).json({ message: 'No update data provided' });
       }
-      
+
+      const tempUsername = generateFromEmail(req.body.email);
+      const tempPassword = generateUsername();
+
       let updatedUser = req.body 
 
       delete updatedUser["_id"]
       delete updatedUser["createdAt"]
       delete updatedUser["updatedAt"]
       delete updatedUser["__v"]
+      try {
+        updatedUser = await User.findByIdAndUpdate(
+          ID,
+          { ...updatedUser, username: tempUsername, password: tempPassword },
+          { new: true }
+        );
+  
+        if (!updatedUser) {
+          return res.status(404).json({ message: 'User not found' });
+        }
+  
+        res.json(updatedUser);
 
-      User
-          .findByIdAndUpdate(ID, updatedUser, { new: true })
-          .then((updatedUser) => {
-              if (!updatedUser) {
-                  return res.status(404).json({ message: 'user not found' });
-              }
-              res.json(updatedUser)
-          })
+      } catch (error) {
+        console.error('❌ Error updating user:', error.message);
+        return res.status(500).json({ message: 'Error updating user', error: error.message });
+      }
+    
+          console.log('🟡 Sending email...');
+
+          try {
+            const {data, error} = await resend.emails.send({
+              from: "Acme <onboarding@resend.dev>",
+              to: [`${updatedUser.email}`],
+              subject: "Welcome to BWF! ",
+              html: `
+                <div>
+                  <strong>Username:</strong> ${tempUsername}<br>
+                  <strong>Password:</strong> ${tempPassword}<br>
+                  <strong>Login within 48 hours</strong><br>
+                  <a href="http://localhost:5173/admin/signin" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Signin</a>
+                </div>`,
+            });
+      
+            if (error) {
+              console.error("❌ Resend error:", error.message || error);
+              return res.status(500).json({ message: "Email sending failed", error: error.message });
+            }
+      
+            console.log('✅ Email sent');
+          } catch (emailError) {
+            console.error('❌ Exception during email send:', emailError.message);
+            return res.status(500).json({ message: 'Exception sending email', error: emailError.message });
+          }
 
   } catch (error) {
-      console.error('Error Editing Company info')
+      console.error('Error failed to validate request')
       res.status(500).json({ error: 'Internal Server Error' })
   }
 })

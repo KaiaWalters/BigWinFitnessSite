@@ -8,7 +8,7 @@ const ProfilePage = () => {
     useEffect(() => {
         const fetchNewUserRequests = async () => {
             try {
-                const response = await fetch(`http://localhost:3001/requestsForAccess`);
+                const response = await fetch(`http://localhost:3001/users`);
                 if (response.ok) {
                     const data = await response.json();
                     console.log(data)
@@ -56,10 +56,10 @@ const ProfilePage = () => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({...user, status: status}),
+                    body: JSON.stringify({...user, status: "rejected"}),
                 })
     
-                console.log(response)
+                console.log("RESPONSE",response)
 
             }catch(error){
                 console.log(error)

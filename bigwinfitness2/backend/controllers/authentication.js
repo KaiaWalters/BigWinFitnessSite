@@ -30,6 +30,27 @@ authenticationRouter.post('/login', async (req, res) => {
             expiresIn: '1h',
         })
 
+        //update new user status from "invited" to "member"
+        if(user.status === "invited"){
+               updatedUser = {...user, status: "member"}
+
+                delete updatedUser["_id"]
+                delete updatedUser["createdAt"]
+                delete updatedUser["updatedAt"]
+                delete updatedUser["__v"]
+
+                console.log("UPDATED USER", user)
+                User
+                    .findByIdAndUpdate(ID, updatedUser, { new: true })
+                    .then((updatedUser) => {
+                        if (!updatedUser) {
+                            return res.status(404).json({ message: 'user not found' });
+                        }
+                        res.json(updatedUser)
+                    })
+        }
+          
+
         res.json({ message: 'Login successful', token, user })
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message })
