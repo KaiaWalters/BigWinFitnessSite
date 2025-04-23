@@ -29,15 +29,42 @@ const ProfilePage = () => {
         fetchNewUserRequests();
     }, []);
 
-    const handleValidation = (e) => {
+    const handleValidation = async (e, user) => {
         const button = e.target.id
-        
+        //TODO: refactor this so only the backend is responsible for updating the ser status on a user. 
+        //TODOD: extract fetch requests into a separate file 
         if(button === "validate_approve"){
-           // put 
-           //send mail 
+            console.log("HIT")
+            try {
+                const response = await fetch('http://localhost:3001/validateRequests', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({...user, status: "invited"}),
+                })
+                console.log("RESPONSE", response)
+
+            }catch(error){
+                console.log(error)
+            }
+         
         }else if( button === "validate_reject"){
-          // delete 
-          //send mail
+            try {
+                const response = await fetch('http://localhost:3001/validateRequests', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({...user, status: status}),
+                })
+    
+                console.log(response)
+
+            }catch(error){
+                console.log(error)
+            }
+         
         }
     }
 
@@ -61,6 +88,7 @@ const ProfilePage = () => {
                                 <th className="border border-gray-300 px-4 py-2 text-left">First Name</th>
                                 <th className="border border-gray-300 px-4 py-2 text-left">Last Name</th>
                                 <th className="border border-gray-300 px-4 py-2 text-left">Reason</th>
+                                <th className="border border-gray-300 px-4 py-2 text-left">Status</th>
                                 <th className="border border-gray-300 px-4 py-2 text-left">Validate</th>
                             </tr>
                         </thead>
@@ -70,9 +98,10 @@ const ProfilePage = () => {
                                     <td className="border border-gray-300 px-4 py-2">{ user.firstname}</td>
                                     <td className="border border-gray-300 px-4 py-2">{ user.lastname}</td>
                                     <td className="border border-gray-300 px-4 py-2">{ user.whystatement}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{ user.status}</td>
                                     <td className="border border-gray-300 px-4 py-2">
-                                        <button id="validate_approve" className="border-black bg-green-100 px-6 py-3" onClick={(e) => handleValidation(e)}>Approve</button>
-                                        <button id="validate_reject" className="border-black bg-red-100 px-6 py-3" onClick={(e) => handleValidation(e)}>Reject</button>
+                                        <button id="validate_approve" className="border-black bg-green-100 px-6 py-3" onClick={(e) => handleValidation(e, user)}>Approve</button>
+                                        <button id="validate_reject" className="border-black bg-red-100 px-6 py-3" onClick={(e) => handleValidation(e, user)}>Reject</button>
                                     </td>
                                 </tr>
                             ))}

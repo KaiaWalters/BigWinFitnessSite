@@ -105,4 +105,39 @@ mailServiceRouter.get("/requestsForAccess", async (req, res) => {
     }
 });
 
+
+mailServiceRouter.put('/validateRequests', async (req, res) => {
+  console.log(req.body)
+  const ID = req.body._id
+  try {
+      if (!ID) {
+          return res.status(400).json({ message: 'Id is needed' })
+      }
+      //Handle empty request body
+      if (!req.body || Object.keys(req.body).length === 0) {
+          return res.status(400).json({ message: 'No update data provided' });
+      }
+      
+      let updatedUser = req.body 
+
+      delete updatedUser["_id"]
+      delete updatedUser["createdAt"]
+      delete updatedUser["updatedAt"]
+      delete updatedUser["__v"]
+
+      User
+          .findByIdAndUpdate(ID, updatedUser, { new: true })
+          .then((updatedUser) => {
+              if (!updatedUser) {
+                  return res.status(404).json({ message: 'user not found' });
+              }
+              res.json(updatedUser)
+          })
+
+  } catch (error) {
+      console.error('Error Editing Company info')
+      res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
 module.exports = mailServiceRouter;
