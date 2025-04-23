@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 
 const ProfilePage = () => {
-    const { userData, logout } = useContext(AuthContext);
     const [newUserRequests, setNewUserRequests] = useState([]);
     const [notification, setNotification] = useState('');
 
@@ -30,27 +29,20 @@ const ProfilePage = () => {
         fetchNewUserRequests();
     }, []);
 
+    const handleValidation = (e) => {
+        const button = e.target.id
+        
+        if(button === "validate_approve"){
+           // put 
+           //send mail 
+        }else if( button === "validate_reject"){
+          // delete 
+          //send mail
+        }
+    }
+
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8">
-            <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full mb-8">
-                <h1 className="text-2xl font-bold text-gray-800 mb-4">Profile</h1>
-                <div className="space-y-4">
-                    <div>
-                        <h2 className="text-sm font-semibold text-gray-600">Username</h2>
-                        <p className="text-gray-800">{userData?.username || 'N/A'}</p>
-                    </div>
-                    <div>
-                        <h2 className="text-sm font-semibold text-gray-600">Email</h2>
-                        <p className="text-gray-800">{userData?.email || 'N/A'}</p>
-                    </div>
-                </div>
-                <button
-                    onClick={logout}
-                    className="mt-6 w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition"
-                >
-                    Logout
-                </button>
-            </div>
 
             {/* Notification Section */}
             {notification && (
@@ -69,6 +61,7 @@ const ProfilePage = () => {
                                 <th className="border border-gray-300 px-4 py-2 text-left">First Name</th>
                                 <th className="border border-gray-300 px-4 py-2 text-left">Last Name</th>
                                 <th className="border border-gray-300 px-4 py-2 text-left">Reason</th>
+                                <th className="border border-gray-300 px-4 py-2 text-left">Validate</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,6 +70,10 @@ const ProfilePage = () => {
                                     <td className="border border-gray-300 px-4 py-2">{ user.firstname}</td>
                                     <td className="border border-gray-300 px-4 py-2">{ user.lastname}</td>
                                     <td className="border border-gray-300 px-4 py-2">{ user.whystatement}</td>
+                                    <td className="border border-gray-300 px-4 py-2">
+                                        <button id="validate_approve" className="border-black bg-green-100 px-6 py-3" onClick={(e) => handleValidation(e)}>Approve</button>
+                                        <button id="validate_reject" className="border-black bg-red-100 px-6 py-3" onClick={(e) => handleValidation(e)}>Reject</button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
