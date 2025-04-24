@@ -1,0 +1,27 @@
+{
+  "name": "bigwinfitness2",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev-frontend": "",
+    "build-frontend": "",
+    "dev-backend": "",
+    "build-backend": "",
+    "lint": "prettier --check",
+    "format": "prettier --write .",
+    "preview": "vite preview"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write . && git add -A ."
+    }
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  },
+  "dependencies": {
+    "husky": "^9.1.7",
+    "mongosh": "^2.5.0"
+  }
+}

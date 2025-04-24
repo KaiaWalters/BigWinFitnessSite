@@ -1,23 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 
 const ProfilePage = () => {
-    const { userData, logout } = useContext(AuthContext);
     const [newUserRequests, setNewUserRequests] = useState([]);
     const [notification, setNotification] = useState('');
 
-    // Fetch new user requests
     useEffect(() => {
         const fetchNewUserRequests = async () => {
             try {
-                const response = await fetch(`http://localhost:3001/admin/new-requests`);
+                const response = await fetch(`http://localhost:3001/users`);
                 if (response.ok) {
                     const data = await response.json();
-                    setNewUserRequests(data.requests);
+                    console.log(data)
+                    setNewUserRequests(data);
 
                     // Show a notification if there are new requests
-                    if (data.requests.length > 0) {
-                        setNotification(`${data.requests.length} new user request(s) pending approval.`);
+                    if (data.length > 0) {
+                        setNotification(`${data.length} new user request(s) pending approval.`);
                     }
                 } else {
                     console.error('Failed to fetch new user requests');
@@ -30,27 +29,47 @@ const ProfilePage = () => {
         fetchNewUserRequests();
     }, []);
 
+    const handleValidation = async (e, user) => {
+        const button = e.target.id
+        //TODO: refactor this so only the backend is responsible for updating the ser status on a user. 
+        //TODOD: extract fetch requests into a separate file 
+        if(button === "validate_approve"){
+            console.log("HIT")
+            try {
+                const response = await fetch('http://localhost:3001/validateRequests', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({...user, status: "invited"}),
+                })
+                console.log("RESPONSE", response)
+
+            }catch(error){
+                console.log(error)
+            }
+         
+        }else if( button === "validate_reject"){
+            try {
+                const response = await fetch('http://localhost:3001/validateRequests', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({...user, status: "rejected"}),
+                })
+    
+                console.log("RESPONSE",response)
+
+            }catch(error){
+                console.log(error)
+            }
+         
+        }
+    }
+
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8">
-            <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full mb-8">
-                <h1 className="text-2xl font-bold text-gray-800 mb-4">Profile</h1>
-                <div className="space-y-4">
-                    <div>
-                        <h2 className="text-sm font-semibold text-gray-600">Username</h2>
-                        <p className="text-gray-800">{userData?.username || 'N/A'}</p>
-                    </div>
-                    <div>
-                        <h2 className="text-sm font-semibold text-gray-600">Email</h2>
-                        <p className="text-gray-800">{userData?.email || 'N/A'}</p>
-                    </div>
-                </div>
-                <button
-                    onClick={logout}
-                    className="mt-6 w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition"
-                >
-                    Logout
-                </button>
-            </div>
 
             {/* Notification Section */}
             {notification && (
@@ -69,14 +88,21 @@ const ProfilePage = () => {
                                 <th className="border border-gray-300 px-4 py-2 text-left">First Name</th>
                                 <th className="border border-gray-300 px-4 py-2 text-left">Last Name</th>
                                 <th className="border border-gray-300 px-4 py-2 text-left">Reason</th>
+                                <th className="border border-gray-300 px-4 py-2 text-left">Status</th>
+                                <th className="border border-gray-300 px-4 py-2 text-left">Validate</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {newUserRequests.map((request, index) => (
+                            {newUserRequests.map((user, index) => (
                                 <tr key={index} className="hover:bg-gray-100">
-                                    <td className="border border-gray-300 px-4 py-2">{request.firstName}</td>
-                                    <td className="border border-gray-300 px-4 py-2">{request.lastName}</td>
-                                    <td className="border border-gray-300 px-4 py-2">{request.userWhy}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{ user.firstname}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{ user.lastname}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{ user.whystatement}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{ user.status}</td>
+                                    <td className="border border-gray-300 px-4 py-2">
+                                        <button id="validate_approve" className="border-black bg-green-100 px-6 py-3" onClick={(e) => handleValidation(e, user)}>Approve</button>
+                                        <button id="validate_reject" className="border-black bg-red-100 px-6 py-3" onClick={(e) => handleValidation(e, user)}>Reject</button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

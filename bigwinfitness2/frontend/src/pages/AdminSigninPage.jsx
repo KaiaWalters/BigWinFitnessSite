@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 const AdminSigninPage = () => {
 
     const initialFormValues = {
-        userName: '', 
+        username: '', 
         password: '', 
     }
 
@@ -53,16 +53,16 @@ const AdminSigninPage = () => {
                 <h2 className="login-title">Log In</h2>
                 <form className="login-form" onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="userName">Username</label>
+                        <label htmlFor="username">Username</label>
                         <input
                             type="text"
-                            id="userName"
-                            name="userName"
+                            id="username"
+                            name="username"
                             placeholder="Enter your username"
                             className="input-field"
                             required
-                            value={formValues.userName}
-                            onChange={(e) => setFormValues({...formValues, userName: e.target.value})}
+                            value={formValues.username}
+                            onChange={(e) => setFormValues({...formValues, username: e.target.value})}
                         />
                     </div>
                     <div className="form-group">
